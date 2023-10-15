@@ -142,11 +142,9 @@ function Form() {
 
   const handleEditChange = (e, fieldName) => {
     const value = e.target.value;
-    setEditedData((prevData) => ({
-      ...prevData,
-      [fieldName]: value,
-    }));
+    setEditedData({ ...editedData, [fieldName]: value });
   };
+  
 
   const handleSave = (index) => {
     const updatedFormData = [...formData];
