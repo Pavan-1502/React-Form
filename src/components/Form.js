@@ -162,11 +162,14 @@ function Form() {
     }
   }, [formErrors, formValues, isSubmit, formData.length]);
 
+ 
   const handleDelete = (index) => {
-    const updatedFormData = formData.filter((_, i) => i !== index);
+    const updatedFormData = [...formData];
+    updatedFormData.splice(index, 1);
     setFormData(updatedFormData);
     localStorage.setItem("formData", JSON.stringify(updatedFormData));
   };
+  
 
   return (
     <>
