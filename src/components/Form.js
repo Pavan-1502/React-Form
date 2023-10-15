@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Form.css";
 
 import Formtable from "./Formtable";
-import Registration from "./Registration"; 
+import Registration from "./Registration";
 
 function Form() {
   const initialValues = {
@@ -26,32 +26,6 @@ function Form() {
 
   const [editIndex, setEditIndex] = useState(null);
   const [editedData, setEditedData] = useState({});
-
-  const handleEdit = (index) => {
-    setEditIndex(index);
-    setEditedData({ ...formData[index] });
-  };
-
-  const handleEditChange = (e, fieldName) => {
-    const value = e.target.value;
-    setEditedData((prevData) => ({
-      ...prevData,
-      [fieldName]: value,
-    }));
-  };
-
-  const handleSave = (index) => {
-    const updatedFormData = [...formData];
-    updatedFormData[index] = editedData;
-    setFormData(updatedFormData);
-    setEditIndex(null);
-
-    localStorage.setItem("formData", JSON.stringify(updatedFormData));
-  };
-
-  const handleCancel = () => {
-    setEditIndex(null);
-  };
 
   const validateField = (name, value) => {
     const errors = {};
@@ -117,7 +91,6 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
     const fieldErrors = {};
     for (const field in formValues) {
       const fieldError = validateField(field, formValues[field]);
@@ -162,14 +135,38 @@ function Form() {
     }
   }, [formErrors, formValues, isSubmit, formData.length]);
 
- 
+  const handleEdit = (index) => {
+    setEditIndex(index);
+    setEditedData({ ...formData[index] });
+  };
+
+  const handleEditChange = (e, fieldName) => {
+    const value = e.target.value;
+    setEditedData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+  };
+
+  const handleSave = (index) => {
+    const updatedFormData = [...formData];
+    updatedFormData[index] = editedData;
+    setFormData(updatedFormData);
+    setEditIndex(null);
+
+    localStorage.setItem("formData", JSON.stringify(updatedFormData));
+  };
+
+  const handleCancel = () => {
+    setEditIndex(null);
+  };
+
   const handleDelete = (index) => {
     const updatedFormData = [...formData];
     updatedFormData.splice(index, 1);
     setFormData(updatedFormData);
     localStorage.setItem("formData", JSON.stringify(updatedFormData));
   };
-  
 
   return (
     <>
