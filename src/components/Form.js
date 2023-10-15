@@ -117,7 +117,7 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate all fields
+    
     const fieldErrors = {};
     for (const field in formValues) {
       const fieldError = validateField(field, formValues[field]);
@@ -125,7 +125,6 @@ function Form() {
         fieldErrors[field] = fieldError[field];
       }
     }
-
     setFormErrors(fieldErrors);
     setIsSubmit(true);
 
@@ -168,10 +167,6 @@ function Form() {
     setFormData(updatedFormData);
     localStorage.setItem("formData", JSON.stringify(updatedFormData));
   };
-
-  // const clearLocalStorage = () => {
-  //   localStorage.removeItem("formData");
-  // };
 
   return (
     <>
